@@ -1,0 +1,153 @@
+\subsection{Apéndice A}
+
+{\bf Enunciado}
+
+Se debe implementar un programa en \verb+C+ o \verb-C++- que tome como entrada los par\'ametros del problema ($r_i$, $r_e$, $m+1$,
+$n$, valor de la isoterma buscada, $T_i$, $T_e(\theta)$) que calcule la temperatura dentro de la pared del horno utilizando el
+modelo propuesto en la secci\'on anterior y que encuentre la isoterma buscada en funci\'on del resultado obtenido del
+sistema de ecuaciones. El m\'etodo para determinar la posici\'on de la isoterma queda a libre elecci\'on de cada grupo y
+debe ser explicado en detalle en el informe.
+
+El programa debe formular el sistema obtenido a partir de las ecuaciones (1) - (6) y considerar dos m\'etodos posibles
+para su resoluci\'on: mediante el algoritmo cl\'asico de Eliminaci\'on Gaussiana y la Factorizaci\'on LU. Finalmente, el
+programa escribir\'a en un archivo la soluci\'on obtenida con el formato especificado en la siguiente secci\'on.
+
+Como ya se ha visto en la materia, no es posible aplicar los m\'etodos propuestos para la resoluci\'on a cualquier
+sistema de ecuaciones. Sin embargo, la matriz del sistema considerado en el presente trabajo cumple con ser diagonal dominante (no
+estricto) y que, ordenando las variables y ecuaciones convenientemente, es posible armar un sistema de ecuaciones cuya matriz
+posee la propiedad de ser \emph{banda}. Luego, se pide demostrar (o al menos dar un esquema de la demostraci\'on)
+el siguiente resultado e incluirlo en el informe:
+
+\begin{proposition}
+Sea $A \in \mathbb{R}^{n \times n}$ la matriz obtenida para el sistema definido por (1)-(6). Demostrar que es posible
+aplicar Eliminaci\'on Gaussiana sin pivoteo.\footnote{Sugerencia: Notar que la matriz es diagonal dominante (no
+estrictamente) y analizar qué sucede al aplicar un paso de Eliminaci\'on Gaussiana con los elementos de una fila.} 
+\end{proposition}
+
+La soluci\'on del sistema de ecuaciones permitir\'a saber la temperatura en los puntos de la discretizaci\'on. Sin embargo,
+nuestro inter\'es es calcular la isoterma 500, para poder determinar si la estructura se encuentra en peligro. Luego, se pide lo siguiente:
+\begin{itemize}
+\item Dada la soluci\'on del sistema de ecuaciones, proponer una forma de estimar en cada \'angulo de la discretizaci\'on la posici\'on de la 
+isoterma 500.
+\item En funci\'on de la aproximaci\'on de la isoterma, proponer una forma (o medida) a utilizar para evaluar la peligrosidad de la estructura
+en funci\'on de la distancia a la pared externa del horno.
+\end{itemize}
+
+
+En funci\'on de la experimentaci\'on, se busca realizar dos estudios complementarios: por un lado, analizar c\'omo se comporta el sistema y, por otro, 
+cu\'ales son los requerimientos computacionales de los m\'etodos. Se pide como m\'inimo realizar los siguientes experimentos:
+\begin{enumerate}
+\item Comportamiento del sistema.
+\begin{itemize}
+\item Considerar al menos dos instancias de prueba, generando distintas discretizaciones para cada una de ellas y
+comparando la ubicaci\'on de la isoterma buscada respecto de la pared externa del horno. Se sugiere presentar gr\'aficos
+de temperatura o curvas de nivel para los mismos, ya sea utilizando las herramientas provistas por la c\'atedra o
+implementando sus propias herramientas de graficaci\'on. 
+\item Estudiar la proximidad de la isoterma buscada respecto de la pared exterior del horno en funci\'on de distintas 
+granularidades de discretizaci\'on y las condiciones de borde. 
+\end{itemize}
+\item Evaluaci\'on de los m\'etodos.
+\begin{itemize}
+\item Analizar el tiempo de c\'omputo requerido para obtener la soluci\'on del sistema en funci\'on de la granularidad de 
+la discretizaci\'on. Se sugiere presentar los resultados mediante gr\'aficos de tiempo de c\'omputo en funci\'on de alguna 
+de las variables del problema.
+\item Considerar un escenario similar al propuesto en el experimento 1. pero donde las condiciones de borde (i.e., $T_i$ y $T_e(\theta)$)
+cambian en distintos instantes de tiempo. En este caso, buscamos obtener la secuencia de estados de la temperatura en
+la pared del horno, y la respectiva ubicaci\'on de la isoterma especificada. Para ello, se considera una secuencia de $ninst$
+vectores con las condiciones de borde, y las temperaturas en cada estado es la soluci\'on del correspondiente sistema de
+ecuaciones. Se pide formular al menos un experimento de este tipo, aplicar los m\'etodos de resoluci\'on propuestos de
+forma conveniente y compararlos en t\'erminos de tiempo total de c\'omputo requerido para distintos valores de $ninst$.
+\end{itemize}
+\end{enumerate}
+
+De manera opcional, aquellos grupos que quieran ir un poco m\'as all\'a pueden considerar trabajar y desarrollar alguno(s) 
+de los siguientes puntos extra:
+\begin{enumerate}
+\item Notar que el sistema resultante tiene estructura \emph{banda}. Proponer una estructura para aprovechar este hecho en t\'erminos de la
+\emph{complejidad espacial} y como se adaptar\'ian los algoritmos de Eliminaci\'on Gaussiana y Factorizaci\'on LU para reducir la
+cantidad de operaciones a realizar.
+\item Implementar dicha estructura y las adaptaciones necesarias para el algoritmo de Eliminaci\'on Gaussiana.
+\item Implementar dicha estructura y las adaptaciones necesarias para el algoritmo de Factorizaci\'on LU. 
+\end{enumerate}
+
+Finalmente, se deber\'a presentar un informe que incluya una descripci\'on detallada de los m\'etodos implementados y
+las decisiones tomadas, el m\'etodo propuesto para el c\'alculo de la isoterma buscada y los experimentos realizados,
+junto con el correspondiente an\'alisis y siguiendo las pautas definidas en el archivo \verb+pautas.pdf+.
+
+
+\subsection{Apéndice B}
+
+\textbf{Código fuente para la creación de la matriz}
+\textbf{}
+
+\lstset{language=C++, breaklines=true, basicstyle=\footnotesize}
+\begin{lstlisting}[frame=single]
+vector< vector<double> > crearMatriz (double n, double m, double ri, double deltaR, double deltaA){
+
+	vector< vector<double> > matriz((m+1)*n, vector<double>((m+1)*n)); 
+
+	//Completo primeras n filas y ultimas n filas con 1s en la diagonal
+	for (int i = 0; i < n; i++){
+		matriz[i][i] = 1;
+	}
+	for (int i = (n*(m+1) - n); i < n*(m+1); i++){
+		matriz[i][i] = 1;
+	}
+
+	//Completo resto de las ecuaciones usando las formulas
+	for (int j = 1; j < m; j++){
+		double r = ri + j * deltaR;
+		for (int k = 0; k < n; k++){
+			//uso para calcular en la matriz la posicion j,k = n x j + k
+
+			// t j,k
+			matriz[n*j + k][n*j + k] = (-2*pow(r,2)*pow(deltaA, 2) + r*deltaR*pow(deltaA, 2) - 2*pow(deltaR, 2))/(pow(deltaR, 2)*pow(r, 2)*pow(deltaA, 2));
+			
+			// t j-1, k
+			matriz[n*j + k][n*(j-1) + k] = (r - deltaR)/(pow(deltaR, 2)* r);
+
+			// t j+1, k
+			matriz[n*j + k][n*(j+1) + k] = 1 / pow(deltaR, 2);
+
+			// t j, k-1
+			matriz[n*j + k][n*j + (k - 1 > 0? k - 1 : n - 1)] = 1 / (pow(r, 2)*pow(deltaA, 2));
+
+			//t j, k+1
+			matriz[n*j + k][n*j + (k + 1 < n - 1? k + 1 : 0)] = 1 / (pow(r, 2)*pow(deltaA, 2));
+		}
+	}
+	return matriz;
+}
+\end{lstlisting}
+
+\textbf{}
+\textbf{Código fuente para Eliminación Gaussiana con aprovechamiento de banda}
+\textbf{}
+
+\lstset{language=C++, breaklines=true, basicstyle=\footnotesize}
+\begin{lstlisting}[frame=single]
+void EliminacionParaBanda (vector<vector<double>>& mat, int bandaAltura, int bandaAncho, vector<double>& adjunta)
+{
+    int h = mat.size();
+    int w = mat[0].size();
+    for (int PivoteDiagonal = 0; PivoteDiagonal < w; PivoteDiagonal++)
+    {
+        //corre desde la fila de abajo de la diagonal hasta la bandaAltura-iesima de abajo de la diagonal
+        //el resto son 0 por la propiedad banda
+        for (int FilaActual = PivoteDiagonal + 1; FilaActual < PivoteDiagonal + bandaAltura && FilaActual < h; FilaActual++)
+        {
+            if ( mat [FilaActual][PivoteDiagonal] != 0)
+            {
+                double coeficiente = mat [FilaActual][PivoteDiagonal] / mat [PivoteDiagonal][PivoteDiagonal];
+                adjunta [FilaActual] -= adjunta[PivoteDiagonal] * coeficiente;
+                //corre desde la columna de la diagonal hasta la bandaAncho-iesima de la derecha de la diagonal
+                //el resto son 0 por la propiedad banda
+                for (int ColumaEnSuma = PivoteDiagonal; ColumaEnSuma < FilaActual + bandaAncho && ColumaEnSuma < w; ColumaEnSuma++)
+                {
+                    mat [FilaActual][ColumaEnSuma] -= mat [PivoteDiagonal][ColumaEnSuma] * coeficiente;
+                }
+            }
+        }
+    }
+}
+\end{lstlisting}

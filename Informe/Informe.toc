@@ -1,0 +1,45 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\'on Te\'orica}{3}
+\contentsline {subsection}{\numberline {1.1}Explicaci\'on de los m\'etodos utilizados}{3}
+\contentsline {subsubsection}{\numberline {1.1.1}Eliminaci\'on Gaussiana}{3}
+\contentsline {subsubsection}{\numberline {1.1.2}Descomposici\'on LU}{3}
+\contentsline {subsubsection}{\numberline {1.1.3}Resolver un sistema triangular}{3}
+\contentsline {subsubsection}{\numberline {1.1.4}Resolver un sistema LU}{3}
+\contentsline {section}{\numberline {2}Desarrollo}{4}
+\contentsline {subsection}{\numberline {2.1}Presentaci\'on del problema y explicaci\'on del m\'etodo de discretizaci\'on}{4}
+\contentsline {subsection}{\numberline {2.2}Armado de la Matriz Banda}{4}
+\contentsline {subsection}{\numberline {2.3}Demostraci\IeC {\'o}n: Eliminaci\IeC {\'o}n Gaussiana sin pivoteo}{5}
+\contentsline {subsubsection}{\numberline {2.3.1}Lema}{5}
+\contentsline {subsubsection}{\numberline {2.3.2}Demostraci\'on de la proposici\'on}{5}
+\contentsline {subsection}{\numberline {2.4}Planteo de Algoritmos}{7}
+\contentsline {subsection}{\numberline {2.5}Planteo de Mediciones Experimentales}{8}
+\contentsline {section}{\numberline {3}Resultados y Discusi\'on}{9}
+\contentsline {subsection}{\numberline {3.1}Resultados con respecto al Tiempo de ejecuci\'on}{9}
+\contentsline {subsubsection}{\numberline {3.1.1}Experimento 1}{9}
+\contentsline {subsubsection}{\numberline {3.1.2}Resultados del Experimento 1}{9}
+\contentsline {subsubsection}{\numberline {3.1.3}Experimento 2}{9}
+\contentsline {subsubsection}{\numberline {3.1.4}Resultados del Experimento 2}{10}
+\contentsline {subsubsection}{\numberline {3.1.5}Experimento 3}{11}
+\contentsline {subsubsection}{\numberline {3.1.6}Resultados del Experimento 3}{11}
+\contentsline {subsection}{\numberline {3.2}Resultados con respecto a la Isoterma}{12}
+\contentsline {subsubsection}{\numberline {3.2.1}Experimento 4}{12}
+\contentsline {subsubsection}{\numberline {3.2.2}Resultados del experimento 4}{12}
+\contentsline {subsubsection}{\numberline {3.2.3}Experimento 5}{13}
+\contentsline {subsubsection}{\numberline {3.2.4}Resultados del experimento 5}{13}
+\contentsline {subsubsection}{\numberline {3.2.5}Experimento 6}{14}
+\contentsline {subsubsection}{\numberline {3.2.6}Resultados del experimento 6}{14}
+\contentsline {subsubsection}{\numberline {3.2.7}Experimento 7}{14}
+\contentsline {subsubsection}{\numberline {3.2.8}Primera entrada para el experimento 7}{15}
+\contentsline {subsubsection}{\numberline {3.2.9}Resultados para la primera entrada para el experimento 7}{15}
+\contentsline {subsubsection}{\numberline {3.2.10}Segunda entrada para el Experimento 7}{15}
+\contentsline {subsubsection}{\numberline {3.2.11}Resultados para la segunda entrada para el Experimento 7}{15}
+\contentsline {subsubsection}{\numberline {3.2.12}Experimento 8}{16}
+\contentsline {subsubsection}{\numberline {3.2.13}Resultados del Experimento 8}{16}
+\contentsline {subsection}{\numberline {3.3}Resultados con respecto a la Peligrosidad}{17}
+\contentsline {subsubsection}{\numberline {3.3.1}Experimento 9}{17}
+\contentsline {subsubsection}{\numberline {3.3.2}Resultados del experimento 9}{17}
+\contentsline {section}{\numberline {4}Conclusiones}{18}
+\contentsline {section}{\numberline {5}Ap\'endices}{19}
+\contentsline {subsection}{\numberline {5.1}Ap\IeC {\'e}ndice A}{19}
+\contentsline {subsection}{\numberline {5.2}Ap\IeC {\'e}ndice B}{20}
+\contentsline {section}{\numberline {6}Referencias}{21}
